@@ -12,6 +12,12 @@ Started with the Rails [Getting Started](https://guides.rubyonrails.org/getting_
 ```
 rails new .
 ```
+
+To *not* generate tests use:
+```
+rails new . -T
+```
+
 ## Setup
 
 ### Debugger
@@ -56,6 +62,23 @@ In the controllers required to add the following before a **POST** (Create):
 skip_before_action :verify_authenticity_token
 ```
 Otherwise will not write to the database. Refer to [stackoverflow question](https://stackoverflow.com/questions/65688157/why-is-my-http-origin-header-not-matching-request-base-url-and-how-to-fix) for more details.
+
+## Test
+
+### RSpec
+
+```
+bundle exec rspec
+```
+
+
+Add [RSpec](https://rspec.info/features/6-0/rspec-rails/) template code:
+- Add `gem "rspec-rails"`
+- Install
+    ```
+    rails g rspec:install
+    ```
+
 
 ## References
 

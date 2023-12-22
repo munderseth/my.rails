@@ -1,1 +1,11 @@
-<h1>Hello, Rails!</h1>
+<h1>List of Articles</h1>
+<ul>
+  <% @articles.each do |ar| %>
+    <li>
+      <%= link_to(ar.title, ar) %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to("New Article", new_article_path) %>
+
