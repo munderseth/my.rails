@@ -1,9 +1,11 @@
 <h1>List of Articles</h1>
 <ul>
   <% @articles.each do |ar| %>
-    <li>
-      <%= link_to(ar.title, ar) %>
-    </li>
+    <% unless ar.archived? %>
+      <li>
+        <%= link_to(ar.title, ar) %>
+      </li>
+    <% end %>
   <% end %>
 </ul>
 
