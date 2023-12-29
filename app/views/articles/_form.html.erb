@@ -17,7 +17,7 @@
   </div>
   <div>
     <%= f.label :status %><br>
-    <%= f.select :status, ['public', 'private', 'archived'], selected: article.status || 'public' %>
+    <%= f.select :status, Visible::VALID_STATUSES, selected: article.status || 'public' %>
   </div>
 
   <div>
