@@ -12,6 +12,12 @@ Started with the Rails [Getting Started](https://guides.rubyonrails.org/getting_
 ```
 rails new .
 ```
+
+To *not* generate tests use:
+```
+rails new . -T
+```
+
 ## Setup
 
 ### Debugger
@@ -43,6 +49,35 @@ Create `.vscode/launch.json`:
 }
 ```
 
+### Static Page
+Using generator:
+
+```
+rails generate controller StaticPages home
+```
+The following files are created:
+
+```
+create  app/controllers/static_pages_controller.rb
+route  get 'static_pages/home'
+invoke  erb
+create    app/views/static_pages
+create    app/views/static_pages/home.html.erb
+invoke  test_unit
+create    test/controllers/static_pages_controller_test.rb
+invoke  helper
+create    app/helpers/static_pages_helper.rb
+invoke    test_unit
+```
+
+Update `config\routes.rb`:
+```
+ get 'static_pages/home'
+ ..
+ root "static_pages#home"
+```
+Next, make updates to `app/views/static_pages/home.html.erb`.
+
 ### Codespaces
 There are some specific to work in Codespaces.
 
@@ -56,6 +91,23 @@ In the controllers required to add the following before a **POST** (Create):
 skip_before_action :verify_authenticity_token
 ```
 Otherwise will not write to the database. Refer to [stackoverflow question](https://stackoverflow.com/questions/65688157/why-is-my-http-origin-header-not-matching-request-base-url-and-how-to-fix) for more details.
+
+## Test
+
+### RSpec
+
+```
+bundle exec rspec
+```
+
+Add [RSpec](https://rspec.info/features/6-0/rspec-rails/) template code:
+- Add `gem "rspec-rails"`
+- Install
+    ```
+    rails g rspec:install
+    ```
+
+
 
 ## References
 
