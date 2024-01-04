@@ -6,6 +6,15 @@ Rails sandbox
 RUBY_DEBUG_OPEN=true rails server
 ```
 
+Running after cloning:
+```
+install bundle --force
+```
+Setup database:
+```
+bundle exec rake db:create db:migrate
+```
+
 ## App
 Started with the Rails [Getting Started](https://guides.rubyonrails.org/getting_started.html#creating-the-blog-application) Blog Application.
 
