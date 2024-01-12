@@ -87,7 +87,7 @@ Update `config\routes.rb`:
 ```
 Next, make updates to `app/views/static_pages/home.html.erb`.
 
-#### Cells
+### Cells
 Updated the article list view (index) to use a [cell](https://github.com/trailblazer/cells).
 
 - `app/cells/article_cell.rb`
