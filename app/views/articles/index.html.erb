@@ -1,17 +1,1 @@
-<h1>List of Articles</h1>
-
-Our blog has <strong><%= Article.public_count %></strong> articles and counting!
-
-<ul>
-  <% @articles.each do |ar| %>
-    <% unless ar.archived? %>
-      <li>
-        <%= link_to(ar.title, ar) %>
-      </li>
-    <% end %>
-  <% end %>
-</ul>
-
-<%= link_to("New Article", new_article_path) %> <br>
-<%= link_to("Home", root_path) %>
-
+<%= cell('article').(:index) %>
