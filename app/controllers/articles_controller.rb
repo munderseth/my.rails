@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   def index
-   # @articles = Article.all
+    logger.debug "DEBUG: #{__method__}, #{__FILE__}:#{__LINE__}"
   end
 
   def show
