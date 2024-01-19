@@ -5,9 +5,12 @@ describe ArticleCell, type: :cell do
 
   context 'cell rendering' do
     it "simple test" do
-      html = cell(:article).call(:test)
+      create(:article)
+      create(:article)
+      @articles = Article.all
+      html = cell(:article, @articles).call(:show)
       Rails.logger.debug "HTML: #{html}"
-      expect(html).to have_content "test"
+      expect(html).to have_content "List of Articles 1.0"
     end
 
     #subject { cell(:article).() }
