@@ -1,10 +1,9 @@
-<% Rails.logger.debug "DEBUG: #{__method__}, #{__FILE__}:#{__LINE__}" %>
-<h1>List of Articles 2.0 </h1>
-
-Our blog has <strong><%= Article.public_count %></strong> articles and counting!
-
+<h1>
+<%=version %>
+</h1>
+<p>Our blog has <strong><%=num_of_articles %></strong> articles and counting!</p>
 <ul>
-  <% @articles.each do |ar| %>
+  <% articles.each do |ar| %>
     <% unless ar.archived? %>
       <li>
         <%= link_to(ar.title, ar) %>

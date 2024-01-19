@@ -73,4 +73,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "rspec-rails"
+  gem "rspec-cells"
+  gem 'factory_bot_rails'
 end
