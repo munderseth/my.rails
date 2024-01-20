@@ -3,21 +3,45 @@ require 'rails_helper'
 describe ArticleCell, type: :cell do
   controller ArticlesController
 
+  let(:cell_object) { cell(:article, @articles).call(:show) }
+
   context 'cell rendering' do
-    it "simple test" do
-      create(:article)
+    subject { cell_object }
+
+    before(:each) do
       create(:article)
       @articles = Article.all
-      html = cell(:article, @articles).call(:show)
-      Rails.logger.debug "HTML: #{html}"
-      expect(html).to have_content "List of Articles 1.0"
     end
 
-    #subject { cell(:article).() }
-    #it { is_expected.to have_selector('p', text: 'Our blog has') }
-    #it { is_expected.to have_selector('h1', text: 'List of Articles 2.0 ') }
-    #it { is_expected.to have_content "articles and counting!" }
-    #it {expect(subject).to have_content "articles and counting!" }
+    it "simple test" do
+      Rails.logger.debug "HTML: #{subject}"
+      expect(subject).to have_content "List of Articles 1.0"
+      expect(subject).to have_content "#{@articles.count} articles and counting!"
+    end
+    it { expect(subject).to have_content "List of Articles 1.0" }
+    it { is_expected.to have_selector('p', text: 'Our blog') }
+    it { is_expected.to have_selector('h1', text: "List of Articles #{@articles.count}") }
+  end
+
+  context 'mocking examples' do
+
+    subject { cell_object }
+
+    it "test one" do
+      @my_article = build(:article) # @my_article = Article.new(title: "t1", body: "b1", status: "public")
+      @my_article.expects(:title).returns("return Mock Title ")
+      Article.expects(:find).with(1).returns(@my_article)
+      find = Article.find(1)
+      Rails.logger.debug "Expect Title: #{find.title}"
+    end
+
+    # TODO - Mock cell(..)
+    it "test cell mock" do
+      create(:article)
+      @articles = Article.all
+      Rails.logger.debug "Mocking Cell: #{subject}"
+    end
+
   end
 
 end
