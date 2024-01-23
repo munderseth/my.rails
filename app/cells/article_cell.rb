@@ -1,14 +1,14 @@
 class ArticleCell < Cell::ViewModel
 
+# Default execution
 =begin
   def show
-    Rails.logger.debug "DEBUG(cell#show) This: #{model} #{__method__}, #{__FILE__}:#{__LINE__}"
     render
   end
 =end
 
   def test
-    Rails.logger.debug "This: #{model.inspect} #{__method__}, #{__FILE__}:#{__LINE__}"
+    Rails.logger.debug "DEBUG(article.call(:test)): #{__method__}, #{__FILE__}:#{__LINE__}"
     render
   end
 

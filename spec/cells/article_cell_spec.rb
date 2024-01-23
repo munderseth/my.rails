@@ -3,17 +3,17 @@ require 'rails_helper'
 describe ArticleCell, type: :cell do
   controller ArticlesController
 
-  let(:cell_object) { cell(:article, @articles).call(:show) }
+  let(:cell_object) { cell('article', @articles) }
 
   context 'cell rendering' do
-    subject { cell_object }
+    subject { cell_object.call(:show) }
 
     before(:each) do
       create(:article)
       @articles = Article.all
     end
 
-    it "simple test" do
+    it "simple html verification" do
       Rails.logger.debug "HTML: #{subject}"
       expect(subject).to have_content "List of Articles 1.0"
       expect(subject).to have_content "#{@articles.count} articles and counting!"
@@ -25,9 +25,9 @@ describe ArticleCell, type: :cell do
 
   context 'mocking examples' do
 
-    subject { cell_object }
+    subject { cell_object.call(:test)  }
 
-    it "test one" do
+    it "mock title method" do
       @my_article = build(:article) # @my_article = Article.new(title: "t1", body: "b1", status: "public")
       @my_article.expects(:title).returns("return Mock Title ")
       Article.expects(:find).with(1).returns(@my_article)
@@ -35,8 +35,8 @@ describe ArticleCell, type: :cell do
       Rails.logger.debug "Expect Title: #{find.title}"
     end
 
-    # TODO - Mock cell(..)
-    it "test cell mock" do
+    it "mock cell call" do
+      cell_object.expects(:cell).with('testit').returns("mocking: cell/testit_cell.rb#cell/testit/show.erb")
       create(:article)
       @articles = Article.all
       Rails.logger.debug "Mocking Cell: #{subject}"
