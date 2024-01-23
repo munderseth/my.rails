@@ -1,10 +1,13 @@
 class ArticlesController < ApplicationController
   def index
-    logger.debug "DEBUG: #{__method__}, #{__FILE__}:#{__LINE__}"
+    @articles = Article.all
+    #render plain: "I AM CONFUSED!"
+    #render html: cell(:article, @articles).call(:show)
   end
 
   def show
     @article = Article.find(params[:id])
+    #p render_to_string
   end
 
   def new

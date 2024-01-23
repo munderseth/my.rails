@@ -120,6 +120,11 @@ GEM
       temple
     error_highlight (0.6.0)
     erubi (1.12.0)
+    factory_bot (6.4.5)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.4.3)
+      factory_bot (~> 6.4)
+      railties (>= 5.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.1)
@@ -147,6 +152,8 @@ GEM
     matrix (0.4.2)
     mini_mime (1.1.5)
     minitest (5.20.0)
+    mocha (2.1.0)
+      ruby2_keywords (>= 0.0.5)
     msgpack (1.7.2)
     mutex_m (0.2.0)
     net-imap (0.4.9)
@@ -211,6 +218,9 @@ GEM
     reline (0.4.1)
       io-console (~> 0.5)
     rexml (3.2.6)
+    rspec-cells (0.3.9)
+      cells (>= 4.0.0, < 6.0.0)
+      rspec-rails (>= 3.0.0, < 6.2.0)
     rspec-core (3.12.2)
       rspec-support (~> 3.12.0)
     rspec-expectations (3.12.3)
@@ -281,10 +291,13 @@ DEPENDENCIES
   cells-rails
   debug (= 1.8.0)
   error_highlight (>= 0.4.0)
+  factory_bot_rails
   importmap-rails
   jbuilder
+  mocha
   puma (>= 5.0)
   rails (~> 7.1.2)
+  rspec-cells
   rspec-rails
   selenium-webdriver
   sprockets-rails

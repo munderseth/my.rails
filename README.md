@@ -126,7 +126,31 @@ Add [RSpec](https://rspec.info/features/6-0/rspec-rails/) template code:
     rails g rspec:install
     ```
 
+### RSpec-cells
+Specs are placed in the `spec/cells` directory. Can also generate an example:
 
+```
+rails g rspec:cell articles show
+```
+
+Reference [here](https://github.com/trailblazer/rspec-cells).
+
+### Factory_bot_rails
+Reference [here](https://github.com/thoughtbot/factory_bot_rails)
+
+Using the generator:
+
+```
+rails g factory_bot:model Article title:string body:text
+```
+
+### Mocking
+Reference [here](https://github.com/freerange/mocha).
+
+To config with *RSpec* updated `spec/spec_helper.rb`:
+
+- remove the `config.mock_with :rspec do |mocks|` section
+- add `config.mock_with :mocha`
 
 ## References
 
