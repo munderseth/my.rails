@@ -144,6 +144,14 @@ Using the generator:
 rails g factory_bot:model Article title:string body:text
 ```
 
+### Mocking
+Reference [here](https://github.com/freerange/mocha).
+
+To config with *RSpec* updated `spec/spec_helper.rb`:
+
+- remove the `config.mock_with :rspec do |mocks|` section
+- add `config.mock_with :mocha`
+
 ## References
 
 - https://guides.rubyonrails.org/getting_started.html - Getting Started App
