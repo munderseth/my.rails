@@ -1,16 +1,21 @@
-<h1>
-<%=version %>
-</h1>
-<p>Our blog has <strong><%=num_of_articles %></strong> articles and counting!</p>
-<ul>
-  <% articles.each do |ar| %>
-    <% unless ar.archived? %>
-      <li>
-        <%= link_to(ar.title, ar) %>
-      </li>
+<div class="container">
+  <h1>
+    <%=version %>
+  </h1>
+  <nav>
+    <ul class="navbar">
+      <li><%= link_to("Home", root_path) %></li>
+      <li><%= link_to("New Article", new_article_path) %></li>
+    </ul>
+  </nav>
+  <p>Our blog has <strong><%=num_of_articles %></strong> articles and counting!</p>
+  <ul>
+    <% articles.each do |ar| %>
+      <% unless ar.archived? %>
+        <li>
+          <%= link_to(ar.title, ar) %>
+        </li>
+      <% end %>
     <% end %>
-  <% end %>
-</ul>
-
-<%= link_to("New Article", new_article_path) %> <br>
-<%= link_to("Home", root_path) %>
+  </ul>
+</div>
