@@ -1,4 +1,14 @@
-<h1>Home</h1>
-<p>Use the links below to do stuff</p>
-<p><%= link_to "List of Articles", Article %></p>
-<%= link_to("New Article", new_article_path) %> <br>
+<%= stylesheet_link_tag 'home' %>
+<%= provide(:title, 'Home') %>
+
+<div class="container">
+  <h1>Home</h1>
+  <nav>
+    <ul class="navbar">
+        <li><%= link_to "Articles", Article %></li>
+        <li><%= link_to("New Article", new_article_path) %></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+  <p>Welcome to my Sandbox!</p>
+</div>
