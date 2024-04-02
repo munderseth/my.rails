@@ -6,34 +6,28 @@ def read_emails
   imap.login('notice@stridespace.com', 'myEmail-01')
   imap.select('INBOX')
 
-  #####
-  # imap = Net::IMAP.new('box2411.bluehost.com') # remove ssl: true
-  # imap.login('bounce@testspace.com', 'myEmail-01')
-  # imap.select('INBOX')
-  #####
-
   # Get the number of messages in the mailbox
   mailbox_status = imap.status('INBOX', ["MESSAGES"])
-  puts "Number of messages in the mailbox: #{mailbox_status["MESSAGES"]}"
+  puts "Messages in the mailbox:  #{mailbox_status["MESSAGES"]}"
 
-  # Get the number of unseen messages in the mailbox
-  unseen_messages = imap.search(["UNSEEN"])
-  puts "Number of unseen messages in the mailbox: #{unseen_messages.count} \n"
+  #messages = imap.search(["UNSEEN"]) # Note, "RECENT" does not work with AWS
+  messages = imap.search(["ALL"])
+  puts "Messages being processed: #{messages.count} \n"
 
-  # Get the number of recent messages in the mailbox (Does not work with AWS)
-  #mailbox_status = imap.status('INBOX', ["RECENT"])
-  #puts "Number of recent messages in the mailbox: #{mailbox_status["RECENT"]}"
-
-  unseen_messages.last(20).each do |message_id|
+  messages.last(20).each do |message_id|
     envelope = imap.fetch(message_id, "ENVELOPE")[0].attr["ENVELOPE"]
     body = imap.fetch(message_id, "BODY[TEXT]")[0].attr["BODY[TEXT]"]
     flags = imap.fetch(message_id, "FLAGS")[0].attr["FLAGS"]
     mail = Mail.read_from_string(body)
+    mail_data = imap.fetch(message_id, "BODY[]")[0].attr["BODY[]"]
 
     puts "From: #{envelope.from[0].name}"
     puts "Subject: #{envelope.subject}"
     puts "Flags: #{flags}"
     puts "Body: #{mail.body.decoded}"
+    puts ""
+    puts "------------- MAIL DATA ----------------------\n\n"
+    puts mail_data
   end
 
   imap.logout

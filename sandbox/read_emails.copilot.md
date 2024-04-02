@@ -484,3 +484,44 @@ imap = Net::IMAP.new('imap.mail.us-west-2.awsapps.com', 993, ssl: true)
 ```
 
 In this example, the IMAP server is running on port 993 and SSL/TLS is being used. This is the recommended setup for AWS WorkMail.
+
+munderseth: Explain the details of this call - body = imap.fetch(message_id, "BODY[TEXT]")[0].attr["BODY[TEXT]"]
+
+GitHub Copilot: The `imap.fetch(message_id, "BODY[TEXT]")` call is used to fetch specific data associated with a message in an IMAP server.
+
+Here's a breakdown of the call:
+
+- `imap`: This is an instance of the `Net::IMAP` class, which represents a connection to an IMAP server.
+
+- `fetch`: This is a method of the `Net::IMAP` class. It fetches data associated with a message in the IMAP server.
+
+- `message_id`: This is the identifier of the message you want to fetch data from.
+
+- `"BODY[TEXT]"`: This is the fetch attribute. It specifies what data you want to fetch from the message. In this case, `"BODY[TEXT]"` is used to fetch the body text of the message.
+
+The `fetch` method returns an array of `Net::IMAP::FetchData` objects, each of which contains data for a message. Since you're only fetching data for one message, you only care about the first (and only) `FetchData` object in the array, which is why you use `[0]` to get it.
+
+Each `Net::IMAP::FetchData` object has an `attr` attribute, which is a hash that maps attribute names to their values. In this case, you're interested in the `"BODY[TEXT]"` attribute, which contains the body text of the message. That's why you use `.attr["BODY[TEXT]"]` to get it.
+
+So, the whole call `body = imap.fetch(message_id, "BODY[TEXT]")[0].attr["BODY[TEXT]"]` fetches the body text of the message with the given `message_id` and assigns it to the `body` variable.
+
+munderseth: Why is ".attr["BODY[TEXT]"] require when this attribute is already being fetched?
+
+GitHub Copilot: The `fetch` method in the `Net::IMAP` class returns an array of `Net::IMAP::FetchData` objects. Each `FetchData` object represents the data of a single message that matches the fetch criteria.
+
+Even though you specify `"BODY[TEXT]"` as the attribute to fetch, the `fetch` method still returns a `FetchData` object (or objects), not the raw body text. This is because a single fetch request can ask for multiple attributes, and the `FetchData` object is designed to hold all of these attributes in its `attr` hash.
+
+The `attr` hash maps attribute names (like `"BODY[TEXT]"`) to their corresponding values. So, even though you've fetched the `"BODY[TEXT]"` attribute, you still need to access it from the `attr` hash.
+
+That's why you need to use `.attr["BODY[TEXT]"]` after the `fetch` call. The `fetch` call retrieves the data from the server, and `.attr["BODY[TEXT]"]` extracts the body text from the fetched data.
+
+munderseth: What is the difference between "BODY[]" and "BODY[TEXT]"
+
+
+GitHub Copilot: In the IMAP protocol, `BODY[]` and `BODY[TEXT]` are fetch attributes that specify what part of the message to fetch.
+
+- `BODY[]`: This fetches the entire body of the message, including any MIME parts (like attachments). The returned data is the raw MIME data of the message body.
+
+- `BODY[TEXT]`: This fetches only the text part of the message body. If the message is a simple text message, `BODY[TEXT]` and `BODY[]` will return the same data. But if the message has multiple parts (like an HTML part and a plain text part, or any attachments), `BODY[TEXT]` will only fetch the text part, not the other parts.
+
+So, if you want to fetch the entire message including all its parts, you should use `BODY[]`. But if you're only interested in the text content of the message, you can use `BODY[TEXT]` to fetch just that.

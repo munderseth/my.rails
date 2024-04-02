@@ -152,6 +152,16 @@ To config with *RSpec* updated `spec/spec_helper.rb`:
 - remove the `config.mock_with :rspec do |mocks|` section
 - add `config.mock_with :mocha`
 
+## Doing Stuff
+
+### Reading Email
+For information on reading email refer to [copilot notes](sandbox/read_emails.copilot.md).
+
+To read an inbox using IMAP:
+```
+ruby sandbox/read_emails.rb
+```
+
 ## References
 
 - https://guides.rubyonrails.org/getting_started.html - Getting Started App
