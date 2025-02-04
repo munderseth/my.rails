@@ -8,7 +8,7 @@ RUBY_DEBUG_OPEN=true rails server
 
 Running after cloning:
 ```
-install bundle --force
+bundle install --force
 ```
 Setup database:
 ```
@@ -110,6 +110,34 @@ In the controllers required to add the following before a **POST** (Create):
 skip_before_action :verify_authenticity_token
 ```
 Otherwise will not write to the database. Refer to [stackoverflow question](https://stackoverflow.com/questions/65688157/why-is-my-http-origin-header-not-matching-request-base-url-and-how-to-fix) for more details.
+
+## Event Listern
+
+### New API Controller
+Generate controller:
+```
+rails generate controller Api::Events create
+```
+This creates:
+
+- `app/controllers/api/events_controller.rb`
+- A route in `config/routes.rb`
+
+### Use in Local App
+Including events-sdk.js: 
+
+- Move to `public` directory
+- Include the SDK in Rails App in `app/views/layouts/application.html.erb`, add:
+  ```
+  <script src="http://mark.testspace.test:3000/events-sdk.js"></script>
+  <script>
+    Events.init({
+      appId: "local-test-app",
+      tracking: true
+    });
+  </script>
+  ```
+
 
 ## Test
 
