@@ -111,7 +111,7 @@ skip_before_action :verify_authenticity_token
 ```
 Otherwise will not write to the database. Refer to [stackoverflow question](https://stackoverflow.com/questions/65688157/why-is-my-http-origin-header-not-matching-request-base-url-and-how-to-fix) for more details.
 
-## Event Listern
+## Event Listen
 
 ### New API Controller
 Generate controller:
@@ -123,10 +123,22 @@ This creates:
 - `app/controllers/api/events_controller.rb`
 - A route in `config/routes.rb`
 
+Example POST:
+```
+curl -X POST https://<unique-id>.<region>.codespaces.githubusercontent.com/api/events -H "Content-Type: application/json" -d '{"event": {"name": "Sample Event", "date": "2023-10-01"}}'
+```
+
+### Update CORS Header
+Add a `rack-cors` gem to handle Cross-Origin Resource Sharing (CORS).
+
+- gem `rack-cors`
+- Added new file *config/initializers/cors.rb*
+- Removed the `no-cors` from the POST in the events-sdk.js
+
 ### Use in Local App
 Including events-sdk.js: 
 
-- Move to `public` directory
+- Move `events-sdk.js` to `public` directory
 - Include the SDK in Rails App in `app/views/layouts/application.html.erb`, add:
   ```
   <script src="http://mark.testspace.test:3000/events-sdk.js"></script>
